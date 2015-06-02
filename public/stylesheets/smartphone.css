@@ -1,7 +1,9 @@
 body            { background: #333; }
 
 #page-wrap:after { content: "Smartphone Layout"; }
+#s1 {overflow: auto;}
 
 h2 span, section h3 { display: none; }
 body             { font-size: xx-large; }
 footer, input   { font-size: large; }
+.author {float: none; margin-left: 10px;}

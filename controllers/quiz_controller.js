@@ -11,10 +11,19 @@ exports.load = function(req, res, next, quizId) {
 };
 
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(function(quizes){
-    res.render('quizes/index', {quizes: quizes});  
-  })
-  .catch(function(error) {next(error);});
+  search = req.query.search;
+  if(search) {
+    search = search.replace(/\s/g,"%");
+    models.Quiz.findAll({where: ["pregunta LIKE '%"+search+"%'"], order: 'pregunta ASC'}).then(function(quizes){
+      res.render('quizes/index', {quizes: quizes});  
+    })
+    .catch(function(error) {next(error);});
+  } else {
+    models.Quiz.findAll().then(function(quizes){
+      res.render('quizes/index', {quizes: quizes});  
+    })
+    .catch(function(error) {next(error);});
+  }
 };
 
 exports.show = function(req, res) {
